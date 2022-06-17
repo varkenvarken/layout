@@ -4,6 +4,9 @@ My model railroad layout with JMRI on raspberryPi wit Digikeijs DR5000 + DR4024 
 # description
 This repo basically documents my specific installation steps and will hold any layout and automation files that I will create.
 
+The instructions on [jmri.org](https://www.jmri.org/install/Raspbian.shtml) are a bit outdated and do not cover the JMRI test releases,
+and the image [provided by M Steve Todd](https://mstevetodd.com/rpi) is really nice but configured as an access point and not really what I want.
+
 # hardware
 My layout is controlled by a Digikeijs DR5000. It is connected to a RaspberryPi 3B+ via USB that is running JMRI. On the layout there are server Digikeijs DR4024 servo controllers that drive the points (switches, turnouts) and DR4088CS current sensors that are used for block occupancy detection.
 
@@ -36,10 +39,34 @@ I used [the Raspberry Pi Imager](https://www.raspberrypi.com/software/) on Ubunt
 
 # steps to configure JMRI of the RaspberryPI
 
+Installing JMRI is really straight-forward:
+
 ```bash
 sudo apt-get install openjdk-11-jdk
 wget https://github.com/JMRI/JMRI/releases/download/v4.99.10/JMRI.4.99.10+Rdc754efff4.tgz
 gunzip -c JMRI.4.99.10+Rdc754efff4.tgz | tar xvf
 ```    
+This will leave you with a directory called `JMRI` that contains all the programs like PanelPro.
 
+From this moment on you can login to the RaspberryPi using ssh, so on my Ubuntu machine I simply type
+
+```bash
+ssh -Y <your-username>@<ip-address of the rapberrypi>
+```
+
+If you haven't installed a certificate you will be prompted for a password. 
+
+The `-Y` option will open any window directly on the Ubuntu desktop.
 # configuring the command station link
+
+After login, simply type
+
+```bash
+./JMRI/PanelPro
+```
+
+Af window will open showing the preferences (or open it from the PanelPro -> Edit -> Preferences). Make sure to select `Connections` and configure the connection as shown:
+
+![JMRI DR5000 connection](images/DR5000%20connection.png)
+
+Note the serial port selection: `ttyACM0`. The dropdown will show several, this one works for me.
