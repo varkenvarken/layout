@@ -13,7 +13,7 @@ The RaspberryPi connects to my regular guest wifi network so panels and the like
 
 # schematic
 
-TODO
+![Wiring schematic](images/Wiring%20schematic.svg)
 
 # software
 
